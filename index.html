@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+
+    <title>I Search</title>
+</head>
+
+<body>
+    <div class = "homepage">
+        <div class = "logo">
+            <img src="images/uiuc-logo.png" alt="No Page Found">
+        </div>
+
+        <div class= "search-bar">
+            <input type="text" id="myInput" placeholder="Search Article"; Search Article>
+            <p>Press return to search</p>
+        </div>
+
+        <div class= "note">
+            <p>By: Qinghui Zhou, Yuyuan Tang, Lingzhi Chu, Ti Chen</p>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+var send_data = function() {
+    var input = document.getElementById("myInput");
+    print(input)
+    if(input) {
+        input.addEventListener("keyup", function(event) {
+            if(event.keyCode === 13) {
+                event.preventDefault();
+                alert('Data Sent: ' + input.value); // Send data here
+            }
+        });
+    }
+};
+
+send_data();
+</script>
+
+</html>
