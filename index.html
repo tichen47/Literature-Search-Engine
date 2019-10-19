@@ -40,38 +40,37 @@
 
 
 
+
 var send_data = function() {
-    var input = document.getElementById("myInput");
-
-    var path = 'script.py';
-    var PythonShell = require('python-shell');
-    var pyshell = new PythonShell(myPythonScriptPath);
-
-
-
-    if(input) {
-    var options = {
-    mode: 'text',
-    // pythonPath: 'path/to/python',
-    pythonOptions: ['-u'],
-    scriptPath: 'doc_builder.py',
-    args: [input]
-};
-
-
+     var input = document.getElementById("myInput");
+     print(input)
+     if(input) {
+        var options = {
+            mode: 'text',
+            // pythonPath: 'path/to/python',
+            pythonOptions: ['-u'],
+            scriptPath: 'doc_builder.py',
+            args: [input]
+        };
+        var path = 'script.py';
+        var PythonShell = require('python-shell');
+        var pyshell = new PythonShell(myPythonScriptPath);
         input.addEventListener("keyup", function(event) {
-            if(event.keyCode === 13) {
-                event.preventDefault();
-                alert('Data Sent: ' + input.value); // Send data here
-                PythonShell.run('doc_builder.py', options, function (err, results) {
+        if(event.keyCode === 13) {
+            event.preventDefault();
+            alert('Data Sent: ' + input.value); // Send data here
+            PythonShell.run('doc_builder.py', options, function (err, results) {
                 if (err) throw err;
                 // results is an array consisting of messages collected during execution
                 console.log('results: %j', results);
-});
-            }
+            });
+        }
         });
-    }
-};
+     }
+ };
+
+
+
 
 send_data();
 </script>
