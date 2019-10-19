@@ -1,0 +1,15 @@
+prefix = "." # tells MeTA where to search for datasets
+
+dataset = "contents" # a subfolder under the prefix directory
+corpus = "corpus.toml" # a configuration file for the corpus specifying its format & additional args
+
+# query-judgements = "judgements.txt" # file containing the relevance judgments for this dataset
+# [queryid docid relevance]
+
+index = "contents-idx" # subfolder of the current working directory to place index files
+stop-words = "stopwords.txt"
+
+[[analyzers]]
+method = "ngram-word"
+ngram = 1
+filter = "default-unigram-chain"

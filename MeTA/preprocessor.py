@@ -40,11 +40,11 @@ for filename in filelist:
     abstracts.append(abstract)
     introductions.append(introduction)
 
-with open('titles', 'wb') as f:
-    pickle.dump(titles, f)
-with open('abstractions', 'wb') as f:
-    pickle.dump(abstracts, f)
-with open('introductions', 'wb') as f:
-    pickle.dump(introductions, f)
-with open('contents.dat', 'w') as f:
+pickle.dump(titles, open('titles', 'wb'))
+pickle.dump(abstracts, open('abstractions', 'wb'))
+pickle.dump(introductions, open('introductions', 'wb'))
+pickle.dump(filelist, open('filelist', 'wb'))
+if not os.path.exists('contents'):
+    os.mkdir('contents')
+with open('contents/contents.dat', 'w') as f:
     f.writelines("%s\n" % content for content in contents)
