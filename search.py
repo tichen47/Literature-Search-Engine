@@ -1,15 +1,7 @@
-# indexing
-def indexing(directory):
+import sys
 
 
+if __name__ == '__main__':
+    print(sys.argv[1]) # input
 
-class Index:
-    def __init__(self, dir):    
-
-
-   def lookup(self, word):
-
-
-   def search(self, query):
-
-#query index
+    # output
