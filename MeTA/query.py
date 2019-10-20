@@ -9,15 +9,25 @@ import metapy
 import pickle
 import argparse
 import time
+import os
+
+def test(input):
+    thislist = ["apple", "banana", "cherry", input]
+    return thislist
+
 def search(input):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--query', default='information retrieval', help='query keywords')
-    opt = parser.parse_args()
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument(input, default='information retrieval', help='query keywords')
+    # opt = parser.parse_args()
 
     # todo: add user feedback as relevance judgments
 
     start = time.time()
-    inv_idx = metapy.index.make_inverted_index('inv_id_config.toml')
+    #if not os.path.exists('inv_id_config.toml'):
+    #    print('Not exist')
+    #    exit(-1)
+
+    inv_idx = metapy.index.make_inverted_index('MeTA/inv_id_config.toml')
     end = time.time()
     print(end - start)
 
@@ -27,7 +37,8 @@ def search(input):
     ranker = metapy.index.OkapiBM25()
 
     query = metapy.index.Document()
-    query.content(opt.query)
+    # query.content(opt.query)
+    query.content(input)
 
     top_docs = ranker.score(inv_idx, query, num_results=20)
 
@@ -42,3 +53,8 @@ def search(input):
         ans.append((filelist[d_id]+titles[d_id]+introductions[d_id]))
         # print("link: %s, title: %s, abstract: %s" % (filelist[d_id], titles[d_id], introductions[d_id]))
     return ans
+
+if __name__ == '__main__':
+    result = search("hello")
+    for item in result:
+        print(item)
