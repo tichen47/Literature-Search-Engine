@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
         crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="static/style.css" />
 
     <title>I Search</title>
 </head>
@@ -15,19 +15,15 @@
 <body>
     <div class = "homepage">
         <div class = "logo">
-            <img src="images/uiuc-logo.png" alt="No Page Found">
+            <img src="static/uiuc-logo.png" alt="No Page Found">
         </div>
 
         <div class= "search-bar">
-            <input type="text" id="myInput" placeholder="Search Article"; Search Article>            
-            <p>Press return to search</p>
+            <form action="search">
+                <input name="input", id="myInput", placeholder="Search Article">
+                <input type="submit">
+            </form>
         </div>
-
-        <ul>
-            {% for fileID in results %}
-              <li>{{{fileID}}</li>
-            {% endfor %}
-          </ul>
           
         <div class= "note">
             <p>By: Qinghui Zhou, Yuyuan Tang, Lingzhi Chu, Ti Chen</p>
@@ -36,43 +32,5 @@
 
 </body>
 
-<script>
-
-
-
-
-var send_data = function() {
-     var input = document.getElementById("myInput");
-     print(input)
-     if(input) {
-        var options = {
-            mode: 'text',
-            // pythonPath: 'path/to/python',
-            pythonOptions: ['-u'],
-            scriptPath: 'doc_builder.py',
-            args: [input]
-        };
-        var path = 'script.py';
-        var PythonShell = require('python-shell');
-        var pyshell = new PythonShell(myPythonScriptPath);
-        input.addEventListener("keyup", function(event) {
-        if(event.keyCode === 13) {
-            event.preventDefault();
-            alert('Data Sent: ' + input.value); // Send data here
-            PythonShell.run('doc_builder.py', options, function (err, results) {
-                if (err) throw err;
-                // results is an array consisting of messages collected during execution
-                console.log('results: %j', results);
-            });
-        }
-        });
-     }
- };
-
-
-
-
-send_data();
-</script>
 
 </html>
