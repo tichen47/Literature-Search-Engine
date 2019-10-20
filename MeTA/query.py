@@ -8,18 +8,27 @@ Created on 2019/10/19 3:26 PM
 
 import metapy
 import pickle
+import argparse
+import time
 
-query_keywords = "systems"
+parser = argparse.ArgumentParser()
+parser.add_argument('--query', default='information retrieval', help='query keywords')
+opt = parser.parse_args()
 
 # todo: add user feedback as relevance judgments
+
+start = time.time()
 inv_idx = metapy.index.make_inverted_index('inv_id_config.toml')
+end = time.time()
+print(end - start)
+
 print('num_docs: %d, unique_terms: %d, avg_doc_length: %d, total_corpus_terms: %d' %
       (inv_idx.num_docs(), inv_idx.unique_terms(), inv_idx.avg_doc_length(), inv_idx.total_corpus_terms()))
 
 ranker = metapy.index.OkapiBM25()
 
 query = metapy.index.Document()
-query.content(query_keywords)
+query.content(opt.query)
 
 top_docs = ranker.score(inv_idx, query, num_results=20)
 
