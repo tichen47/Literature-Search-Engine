@@ -28,11 +28,11 @@ def search(input):
 
     top_docs = ranker.score(inv_idx, query, num_results=20)
 
-    with open('titles', 'rb') as f:
+    with open('MeTA/titles', 'rb') as f:
         titles = pickle.load(f)
-    with open('introductions', 'rb') as f:
+    with open('MeTA/introductions', 'rb') as f:
         introductions = pickle.load(f)
-    with open('filelist', 'rb') as f:
+    with open('MeTA/filelist', 'rb') as f:
         filelist = pickle.load(f)
 
     ans = []
@@ -43,4 +43,4 @@ def search(input):
 
 
 if __name__ == '__main__':
-    search('systems')
+    print(search('systems'))
