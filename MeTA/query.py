@@ -7,17 +7,14 @@ Created on 2019/10/19 3:26 PM
 """
 import metapy
 import pickle
-import argparse
 import time
-def search(input):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--query', default='information retrieval', help='query keywords')
-    opt = parser.parse_args()
 
+
+def search(input):
     # todo: add user feedback as relevance judgments
 
     start = time.time()
-    inv_idx = metapy.index.make_inverted_index('inv_id_config.toml')
+    inv_idx = metapy.index.make_inverted_index('MeTA/inv_id_config.toml')
     end = time.time()
     print(end - start)
 
@@ -27,7 +24,7 @@ def search(input):
     ranker = metapy.index.OkapiBM25()
 
     query = metapy.index.Document()
-    query.content(opt.query)
+    query.content(input)
 
     top_docs = ranker.score(inv_idx, query, num_results=20)
 
@@ -37,8 +34,13 @@ def search(input):
         introductions = pickle.load(f)
     with open('filelist', 'rb') as f:
         filelist = pickle.load(f)
-    ans=[]
+
+    ans = []
     for (d_id, _) in top_docs:
         ans.append((filelist[d_id]+titles[d_id]+introductions[d_id]))
         # print("link: %s, title: %s, abstract: %s" % (filelist[d_id], titles[d_id], introductions[d_id]))
     return ans
+
+
+if __name__ == '__main__':
+    search('systems')

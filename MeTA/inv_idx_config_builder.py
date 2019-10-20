@@ -12,16 +12,16 @@ with open('contents/corpus.toml', 'w') as f:
     f.write('type = "line-corpus"\n')
     f.write('store-full-text = true\n')
 
-config = """prefix = "." # tells MeTA where to search for datasets
+config = """prefix = "./MeTA" # tells MeTA where to search for datasets
 
-dataset = "contents" # a subfolder under the prefix directory
+dataset = "Acontents" # a subfolder under the prefix directory
 corpus = "corpus.toml" # a configuration file for the corpus specifying its format & additional args
 
-# query-judgements = "judgements.txt" # file containing the relevance judgments for this dataset
+# query-judgements = "./MeTA/judgements.txt" # file containing the relevance judgments for this dataset
 # [queryid docid relevance]
 
-index = "contents-idx" # subfolder of the current working directory to place index files
-stop-words = "stopwords.txt"
+index = "./MeTA/contents-idx" # subfolder of the current working directory to place index files
+stop-words = "./MeTA/stopwords.txt"
 
 [[analyzers]]
 method = "ngram-word"
