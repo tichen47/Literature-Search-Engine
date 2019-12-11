@@ -9,7 +9,7 @@ import argparse
 import metapy
 import pickle
 import time
-
+from ranker import SimpleRanker, Jelinek_Mercer, Absolute_Discount, DirichletPrior
 
 def search(input):
     # todo: add user feedback as relevance judgments
@@ -26,7 +26,8 @@ def search(input):
     print('num_docs: %d, unique_terms: %d, avg_doc_length: %d, total_corpus_terms: %d' %
         (inv_idx.num_docs(), inv_idx.unique_terms(), inv_idx.avg_doc_length(), inv_idx.total_corpus_terms()))
 
-    ranker = metapy.index.OkapiBM25()
+    doc_weight=None
+    ranker = SimpleRanker(doc_weight, score_func='score_BM25_L')
 
     query_keywords = metapy.index.Document()
     query_keywords.content(opt.query)

@@ -1,3 +1,11 @@
 .DS_Store
 .idea/
 data/dataset
+MeTA/__pycache__
+MeTA/contents
+MeTA/contents-idx
+MeTA/abstractions
+MeTA/filelist
+MeTA/introductions
+MeTA/titles
+results
