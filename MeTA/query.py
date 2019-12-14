@@ -28,6 +28,7 @@ def search(input):
 
     doc_weight=None
     ranker = SimpleRanker(doc_weight, score_func='score_BM25_L')
+    # ranker = metapy.index.OkapiBM25()
 
     query_keywords = metapy.index.Document()
     query_keywords.content(opt.query)
