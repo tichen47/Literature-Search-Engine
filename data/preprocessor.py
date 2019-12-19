@@ -69,11 +69,11 @@ if __name__ == '__main__':
                         p_a_rel.append([paper_dict[obj['title']], author_dict[author]])
                     details.append([obj['title'], obj['authors'], obj['venue'], obj['url'][0], obj['abstract'], obj['keywords']])
 
-    with open('../MeTA/Aminer/AMiner.dat', 'w') as f:
+    with open('../MeTA/AMiner/AMiner.dat', 'w') as f:
         f.writelines('%s\n' % line for line in docs)
     save_dict(conf_dict, 'id_conf')
     save_dict(author_dict, 'id_author')
     save_dict(paper_dict, 'paper')
     save_rel(p_c_rel, 'paper_conf')
     save_rel(p_a_rel, 'paper_author')
-    pickle.dump(details, open('../MeTA/Aminer/details', 'wb'))
+    pickle.dump(details, open('../MeTA/AMiner/details', 'wb'))
