@@ -9,7 +9,8 @@ import argparse
 import metapy
 import pickle
 import time
-from ranker import SimpleRanker, Jelinek_Mercer, Absolute_Discount, DirichletPrior
+from ranker import SimpleRanker
+
 
 def search(input):
     # todo: add user feedback as relevance judgments
@@ -19,7 +20,7 @@ def search(input):
     opt = parser.parse_args()
 
     start = time.time()
-    inv_idx = metapy.index.make_inverted_index('MeTA/inv_id_config.toml')
+    inv_idx = metapy.index.make_inverted_index('MeTA/Aminer/inv_id_config.toml')
     end = time.time()
     print(end - start)
 
@@ -35,21 +36,16 @@ def search(input):
 
     top_docs = ranker.score(inv_idx, query_keywords, num_results=20)
 
-    with open('MeTA/titles', 'rb') as f:
-        titles = pickle.load(f)
-    with open('MeTA/introductions', 'rb') as f:
-        introductions = pickle.load(f)
-    with open('MeTA/filelist', 'rb') as f:
-        filelist = pickle.load(f)
+    with open('MeTA/AMiner/details', 'rb') as f:
+        details = pickle.load(f)
 
     ans = []
     for (d_id, _) in top_docs:
-        fin = "https://www.aclweb.org/anthology/" + filelist[d_id].split(".")[0] + ".pdf"
-        ans.append((fin, titles[d_id], introductions[d_id]))
+        ans.append(details[d_id])
     return ans
 
 
 if __name__ == '__main__':
     ans = search('systems')
-    pickle.dump(ans, open('results', 'wb'))
+    pickle.dump(ans, open('query_results', 'wb'))
     print('dump ok!')

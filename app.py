@@ -17,7 +17,7 @@ def search():
     input = request.args['input']
     command = "python3 MeTA/query.py --query=" + input
     os.system(command)
-    results = pickle.load(open('results', 'rb'))
+    results = pickle.load(open('query_results', 'rb'))
     return render_template("results.html", input=input, results=results)
 
 

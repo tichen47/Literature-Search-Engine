@@ -84,6 +84,8 @@ class MetaPathGenerator:
                 for i in range(0, walklength):
                     authors = self.conf_authorlist[conf]
                     numa = len(authors)
+                    if numa == 0:
+                        continue
                     authorid = random.randrange(numa)
                     author = authors[authorid]
                     outline += " " + self.id_author[author]
@@ -117,33 +119,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
