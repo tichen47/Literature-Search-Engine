@@ -22,6 +22,8 @@ def get_top_3(infile, invec):
     lnum=1
     for line in f:
         lnum=lnum+1
+        if(lnum>10000):# do not query too much
+            break
         print(lnum)
         v= line.split()
         name= v.pop(0)
