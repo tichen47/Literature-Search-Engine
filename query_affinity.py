@@ -8,12 +8,13 @@ def get_distance(a, b):
 def get_embedding(id, infile): # get the embedding of id, if the process cannot find the key, just return the last seen one
     f = open(infile, "r")
     a = f.readline()
+    b = f.readline()
     lnum = 1
     # for efficiency purpose, limit the seasrch to only the first 10000 keys
     for line in f:
         lnum = lnum + 1
         if (lnum > 10000):  # for efficiency
-            return v
+            return []
         # print(lnum)
         v = line.split()
         name = v.pop(0)
@@ -23,6 +24,8 @@ def get_embedding(id, infile): # get the embedding of id, if the process cannot 
 # infile: trained embedding file, invec: the query vector
 # return the top 3 cloest vector of the input vector
 def get_top_3(infile, invec):
+    if len(invec) == 0:
+        return [" NULL"]
     ans= []
     # min1<=min2<=min3= 3 cloest vector to invec
     min1=2147483647
@@ -37,9 +40,9 @@ def get_top_3(infile, invec):
     lnum=1
     for line in f:
         lnum=lnum+1
-        if(lnum>10000):# do not query too much
+        if(lnum>1000):# do not query too much
             break
-        print(lnum)
+        # print(lnum)
         v= line.split()
         name= v.pop(0)
         v= np.array(v).astype(np.float)
@@ -71,4 +74,4 @@ def get_neighbors(infile, nodeName):
 # inv= np.array(ins.split()).astype(np.float)
 # print(get_top_3("metapath2vec/out_aminer/m2vpp.aminer2017.w1000.l100.txt.size128.window7.negative5.txt", inv))
 
-print(get_neighbors("metapath2vec/out_aminer/m2vpp.aminer2017.w1000.l100.txt.size128.window7.negative5.txt", "s"))
+# print(get_neighbors("m2vpp.aminer2017.w1000.l100.txt.size128.window7.negative5.txt", "vICDE"))

@@ -88,8 +88,7 @@
                 <th> Author </th>
                 <th> Conference </th>
                 <th> Abstract </th>
-                <th> Related Paper </th>
-                <th> Related Author </th>
+                <th> Related </th>
                 <th> Relevance</th>
             </tr>
         </thead>
@@ -105,21 +104,10 @@
                 <td> {{res[2]}} </td>
                 <td> {{res[4]}} </td>
                 <td> 
-                    <pre>
-Related Paper 1
-Related Paper 2
-Related Paper 3
-Related Paper 4
-                    </pre>
-                </td>
-                <td> 
-                    <pre>
-Related Author 1
-Related Author 2
-Related Author 3
-Related Author 4
-                    </pre>
-                </td>     
+                    {% for rec in res[6]%} 
+                    {{rec}}
+                    {% endfor%}
+                </td>    
                 <td><input type="button" value="relevant" onclick="relevant(this)"> 
                     <input type="button" value="un-relevant" onclick="unRelevant(this)"> </td>         
             </tr>
