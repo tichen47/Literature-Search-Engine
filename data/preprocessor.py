@@ -49,32 +49,23 @@ if __name__ == '__main__':
                     lines = f.readlines()
                 for line in lines:
                     obj = json.loads(line)
-                    if ('abstract' not in obj and 'keywords' not in obj) \
-                            or 'url' not in obj or ('venue' not in obj and 'authors' not in obj):
+                    if 'abstract' not in obj or 'keywords' not in obj \
+                            or 'url' not in obj or 'venue' not in obj or 'authors' not in obj:
                         continue
                     paper_dict[obj['title']] = len(paper_dict)
-                    doc = obj['title']
-                    if 'abstract' in obj:
-                        doc += ' ' + obj['abstract']
-                    if 'keywords' in obj:
-                        doc += ' ' + ' '.join(obj['keywords'])
+                    doc = obj['title'] + ' ' + obj['abstract'] + ' ' + ' '.join(obj['keywords'])
                     docs.append(doc)
-                    if 'venue' in obj:
-                        if obj['venue'] not in conf_dict:
-                            conf_dict[obj['venue']] = len(conf_dict)
-                        p_c_rel.append([paper_dict[obj['title']], conf_dict[obj['venue']]])
-                    else:
-                        obj['venue'] = ''
-                    if 'authors' in obj:
-                        obj['authors'] = [i['name'] for i in obj['authors']]
-                        for author in obj['authors']:
-                            if author is None:
-                                continue
-                            if author not in author_dict:
-                                author_dict[author] = len(author_dict)
-                            p_a_rel.append([paper_dict[obj['title']], author_dict[author]])
-                    else:
-                        obj['authors'] = []
+
+                    if obj['venue'] not in conf_dict:
+                        conf_dict[obj['venue']] = len(conf_dict)
+                    p_c_rel.append([paper_dict[obj['title']], conf_dict[obj['venue']]])
+                    obj['authors'] = [i['name'] for i in obj['authors']]
+                    for author in obj['authors']:
+                        if author is None:
+                            continue
+                        if author not in author_dict:
+                            author_dict[author] = len(author_dict)
+                        p_a_rel.append([paper_dict[obj['title']], author_dict[author]])
                     details.append([obj['title'], obj['authors'], obj['venue'], obj['url'][0]])
 
     with open('docs.txt', 'w') as f:
