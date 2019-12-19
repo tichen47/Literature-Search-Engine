@@ -31,7 +31,82 @@
     </div>
 
 <hr>
-  {% for res in results %}
+
+<style>
+    table {
+        font-family: "Times New Roman", Times, serif;
+        border: 1px solid black;
+        width: 80%;
+        height: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border-collapse: collapse;
+      }
+      table td, table th {
+        border: 1px solid gray;
+        padding: 3px 2px;
+      }
+      table tbody td {
+        font-size: 13px;
+      }
+      table tr:nth-child(even) {
+        background: #D0E4F5;
+      }
+      table thead {
+        background: #0B6FA4;
+        border-bottom: 5px soli gray;
+      }
+      table thead th {
+        font-size: 17px;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-align: center;
+        border-left: 1px solid gray;
+      }
+      table thead th:first-child {
+        border-left: none;
+      }
+</style>
+    <div class="result">
+        <table>
+        <thead> 
+            <tr>
+                <th> Title </th> 
+                <th> Author </th>
+                <th> Abstract </th>
+                <th> Related Paper </th>
+                <th> Related Author </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for res in results %}
+            <tr>
+                <td> <a href={{res[0]}}>{{res[1]}}</a> </td> 
+                <td> Author </td>
+                <td> {{res[2]}} </td>
+                <td> 
+                    <pre>
+Related Paper 1
+Related Paper 2
+Related Paper 3
+Related Paper 4
+                    </pre>
+                </td>
+                <td> 
+                    <pre>
+Related Author 1
+Related Author 2
+Related Author 3
+Related Author 4
+                    </pre>
+                </td>                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </div>
+
+  <!-- {% for res in results %}
     <p><a href={{res[0]}}>{{res[1]}}</a></p>
     <div class = "btn-group">
         <button>Relevant</button>
@@ -39,7 +114,7 @@
     </div>
     <p>{{res[2]}}</p>
     <hr>
-  {% endfor %}
+  {% endfor %} -->
 </ul>
 
 </body>

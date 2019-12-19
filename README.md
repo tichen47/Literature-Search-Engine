@@ -14,5 +14,4 @@
 1. run `python3 app.py`
 2. open your browser and visit `http://0.0.0.0/`
 
-## Remote server: 3.132.112.143
-## Local demo: [Video-Link](https://youtu.be/rVnwfPvodn8)
+## Remote server: 18.190.124.145

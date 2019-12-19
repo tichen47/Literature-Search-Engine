@@ -9,3 +9,9 @@ MeTA/filelist
 MeTA/introductions
 MeTA/titles
 results
+data/details
+data/docs.txt
+data/output.aminer.w1000.l100.txt
+data/net_aminer
+data/py4genMetaPaths2.py
+run.sh
