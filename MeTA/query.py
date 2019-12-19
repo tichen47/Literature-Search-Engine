@@ -20,7 +20,7 @@ def search(input):
     opt = parser.parse_args()
 
     start = time.time()
-    inv_idx = metapy.index.make_inverted_index('MeTA/Aminer/inv_id_config.toml')
+    inv_idx = metapy.index.make_inverted_index('MeTA/AMiner/inv_id_config.toml')
     end = time.time()
     print(end - start)
 
