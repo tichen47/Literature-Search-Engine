@@ -49,11 +49,12 @@ if __name__ == '__main__':
                     lines = f.readlines()
                 for line in lines:
                     obj = json.loads(line)
-                    if 'abstract' not in obj or 'keywords' not in obj \
+                    if obj['title'] in paper_dict or \
+                            'abstract' not in obj or 'keywords' not in obj \
                             or 'url' not in obj or 'venue' not in obj or 'authors' not in obj:
                         continue
                     paper_dict[obj['title']] = len(paper_dict)
-                    doc = obj['title'] + ' ' + obj['abstract'] + ' ' + ' '.join(obj['keywords'])
+                    doc = obj['title'].replace('\n', ' ') + ' ' + obj['abstract'].replace('\n', ' ') + ' ' + ' '.join(obj['keywords'])
                     docs.append(doc)
 
                     if obj['venue'] not in conf_dict:
@@ -66,13 +67,13 @@ if __name__ == '__main__':
                         if author not in author_dict:
                             author_dict[author] = len(author_dict)
                         p_a_rel.append([paper_dict[obj['title']], author_dict[author]])
-                    details.append([obj['title'], obj['authors'], obj['venue'], obj['url'][0]])
+                    details.append([obj['title'], obj['authors'], obj['venue'], obj['url'][0], obj['abstract'], obj['keywords']])
 
-    with open('docs.txt', 'w') as f:
+    with open('../MeTA/Aminer/AMiner.dat', 'w') as f:
         f.writelines('%s\n' % line for line in docs)
     save_dict(conf_dict, 'id_conf')
     save_dict(author_dict, 'id_author')
     save_dict(paper_dict, 'paper')
     save_rel(p_c_rel, 'paper_conf')
     save_rel(p_a_rel, 'paper_author')
-    pickle.dump(details, open('details', 'wb'))
+    pickle.dump(details, open('../MeTA/Aminer/details', 'wb'))

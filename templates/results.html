@@ -68,23 +68,42 @@
         border-left: none;
       }
 </style>
+
+<script>
+    function unRelevant(o) {
+        var p = o.parentNode.parentNode;
+        p.parentNode.removeChild(p);
+    }
+
+    function relevant(o) {
+        o.parentNode.parentNode.style.backgroundColor = "yellow";
+    }
+</script>
+
     <div class="result">
         <table>
         <thead> 
             <tr>
-                <th> Title </th> 
+                <th> Title </th>
                 <th> Author </th>
+                <th> Conference </th>
                 <th> Abstract </th>
                 <th> Related Paper </th>
                 <th> Related Author </th>
+                <th> Relevance</th>
             </tr>
         </thead>
         <tbody>
         {% for res in results %}
             <tr>
-                <td> <a href={{res[0]}}>{{res[1]}}</a> </td> 
-                <td> Author </td>
+                <td> <a href={{res[3]}}>{{res[0]}}</a> </td> 
+                <td> 
+                    {% for author in res[1]%} 
+                    {{author}}
+                    {% endfor%}
+                </td>
                 <td> {{res[2]}} </td>
+                <td> {{res[4]}} </td>
                 <td> 
                     <pre>
 Related Paper 1
@@ -100,21 +119,14 @@ Related Author 2
 Related Author 3
 Related Author 4
                     </pre>
-                </td>                
+                </td>     
+                <td><input type="button" value="relevant" onclick="relevant(this)"> 
+                    <input type="button" value="un-relevant" onclick="unRelevant(this)"> </td>         
             </tr>
         {% endfor %}
         </tbody>
     </div>
 
-  <!-- {% for res in results %}
-    <p><a href={{res[0]}}>{{res[1]}}</a></p>
-    <div class = "btn-group">
-        <button>Relevant</button>
-        <button>Non-Relevant</button>
-    </div>
-    <p>{{res[2]}}</p>
-    <hr>
-  {% endfor %} -->
 </ul>
 
 </body>
