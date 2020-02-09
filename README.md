@@ -14,4 +14,4 @@
 1. run `python3 app.py`
 2. open your browser and visit `http://0.0.0.0/`
 
-## Remote server: 18.190.124.145
+
